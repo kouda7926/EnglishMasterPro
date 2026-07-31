@@ -29,12 +29,6 @@ android.arch = arm64-v8a
 # presplash
 # presplash.filename = %(source.dir)s/presplash.png
 
-# orientation
-orientation = portrait
-
-# fullscreen
-fullscreen = 0
-
 # list of services
 # services = PushService:pyservice
 

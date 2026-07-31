@@ -1,0 +1,27 @@
+name: english_master_pro
+description: English Master Pro - Comprehensive English Learning App
+publish_to: 'none'
+version: 3.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.1.0
+  flutter_tts: ^3.8.3
+  shared_preferences: ^2.2.2
+  percent_indicator: ^4.2.3
+  flip_card: ^0.7.0
+  confetti_widget: ^0.7.0
+  fl_chart: ^0.68.0
+  audioplayers: ^5.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true

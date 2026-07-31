@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build Flutter APK
 
 on:
   push:
@@ -7,50 +7,33 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
-          python-version: '3.11'
+          flutter-version: '3.24.0'
+          channel: 'stable'
 
-      - name: Install system dependencies
+      - name: Flutter Info
         run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            openjdk-17-jdk \
-            autoconf \
-            libtool \
-            pkg-config \
-            zlib1g-dev \
-            libncurses5-dev \
-            libncursesw5-dev \
-            cmake \
-            libffi-dev \
-            libssl-dev \
-            automake \
-            build-essential \
-            clang \
-            lld
+          flutter doctor -v
+          flutter --version
 
-      - name: Install Python dependencies
-        run: |
-          pip install --upgrade pip setuptools wheel
-          pip install buildozer kivy
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Analyze code
+        run: flutter analyze --no-pub || true
 
       - name: Build APK
-        env:
-          BUILDOZER_WARN_ON_ROOT: 0
-        run: |
-          buildozer -y android debug
+        run: flutter build apk --release
 
       - name: Upload APK
-        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: EnglishMasterPro-APK
-          path: bin/*.apk
+          name: EnglishMasterPro-Flutter-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 14
-          if-no-files-found: ignore

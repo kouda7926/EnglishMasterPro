@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+build/
+*.apk
+*.spec.bak
+buildozer.spec.bak
+buildozer.dist
+*.egg-info/
+dist/
+*.log
+bin/
+.buildozer/

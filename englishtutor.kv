@@ -1,0 +1,777 @@
+#:import rgba kivy.utils.rgba
+
+<RoundedCard@BoxLayout>:
+    canvas.before:
+        Color:
+            rgba: rgba('#1E293B')
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [12]
+
+<PrimaryButton@Button>:
+    font_size: '16sp'
+    bold: True
+    background_normal: ''
+    background_color: rgba('#3B82F6')
+    color: 1,1,1,1
+    size_hint_y: None
+    height: 48
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [24]
+
+<SecondaryButton@Button>:
+    font_size: '14sp'
+    background_normal: ''
+    background_color: rgba('#334155')
+    color: 1,1,1,1
+    size_hint_y: None
+    height: 44
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [22]
+
+<CardButton@Button>:
+    font_size: '14sp'
+    background_normal: ''
+    background_color: rgba('#1E293B')
+    color: 1,1,1,1
+    text_size: self.size
+    halign: 'right'
+    valign: 'middle'
+    padding: [16, 10]
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [12]
+
+<QuizOption@Button>:
+    font_size: '15sp'
+    background_normal: ''
+    background_color: rgba('#334155')
+    color: 1,1,1,1
+    size_hint_y: None
+    height: 52
+    text_size: self.size
+    halign: 'center'
+    valign: 'middle'
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [12]
+
+<Screen>:
+    canvas.before:
+        Color:
+            rgba: rgba('#0F172A')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<ScrollView>:
+    bar_color: rgba('#3B82F6')
+    bar_width: 2
+
+# ══════════════════════════════════════════════════════════════
+# SPLASH SCREEN
+# ══════════════════════════════════════════════════════════════
+<SplashScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+        Label:
+            text: "[b]EnglishMaster[/b]"
+            markup: True
+            font_size: '36sp'
+            color: rgba('#3B82F6')
+        Label:
+            text: "Pro v3.0"
+            font_size: '18sp'
+            color: rgba('#94A3B8')
+        Label:
+            text: "Learn English the smart way"
+            font_size: '14sp'
+            color: rgba('#64748B')
+        Widget:
+        Label:
+            text: "Loading..."
+            font_size: '14sp'
+            color: rgba('#3B82F6')
+
+# ══════════════════════════════════════════════════════════════
+# LOGIN SCREEN
+# ══════════════════════════════════════════════════════════════
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 30
+        spacing: 15
+        Widget:
+            size_hint_y: 0.3
+        Label:
+            text: "[b]Welcome![/b]"
+            markup: True
+            font_size: '28sp'
+            color: rgba('#3B82F6')
+            size_hint_y: None
+            height: 50
+        Label:
+            text: "Enter your name to start learning"
+            font_size: '14sp'
+            color: rgba('#94A3B8')
+            size_hint_y: None
+            height: 30
+        TextInput:
+            id: name_input
+            hint_text: "Your name"
+            font_size: '16sp'
+            size_hint_y: None
+            height: 48
+            multiline: False
+            background_normal: ''
+            background_active: ''
+            background_color: rgba('#1E293B')
+            foreground_color: rgba('#F8FAFC')
+            hint_text_color: rgba('#64748B')
+            padding: [16, 12]
+            cursor_color: rgba('#3B82F6')
+        Label:
+            id: error_label
+            text: ""
+            font_size: '13sp'
+            color: rgba('#EF4444')
+            size_hint_y: None
+            height: 20
+        PrimaryButton:
+            text: "Start Learning"
+            on_press: root.login()
+        Widget:
+            size_hint_y: 0.3
+
+# ══════════════════════════════════════════════════════════════
+# HOME SCREEN
+# ══════════════════════════════════════════════════════════════
+<HomeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 16
+        spacing: 12
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: 80
+            Label:
+                id: welcome_label
+                text: "Welcome!"
+                font_size: '22sp'
+                bold: True
+                color: 1,1,1,1
+                halign: 'left'
+                text_size: self.size
+                valign: 'middle'
+            BoxLayout:
+                size_hint_y: None
+                height: 25
+                Label:
+                    id: level_label
+                    text: "Level: Beginner"
+                    font_size: '13sp'
+                    color: rgba('#3B82F6')
+                    halign: 'left'
+                    text_size: self.size
+                Label:
+                    id: xp_label
+                    text: "XP: 0"
+                    font_size: '13sp'
+                    color: rgba('#F59E0B')
+                    halign: 'right'
+                    text_size: self.size
+                Label:
+                    id: streak_label
+                    text: "Streak: 0 days"
+                    font_size: '13sp'
+                    color: rgba('#EF4444')
+                    halign: 'right'
+                    text_size: self.size
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: 90
+            spacing: 8
+            canvas.before:
+                Color:
+                    rgba: rgba('#1E293B')
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [12]
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: words_label
+                    text: "0"
+                    font_size: '24sp'
+                    bold: True
+                    color: rgba('#3B82F6')
+                Label:
+                    text: "Words"
+                    font_size: '11sp'
+                    color: rgba('#94A3B8')
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: grammar_label
+                    text: "0"
+                    font_size: '24sp'
+                    bold: True
+                    color: rgba('#22C55E')
+                Label:
+                    text: "Grammar"
+                    font_size: '11sp'
+                    color: rgba('#94A3B8')
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: exercises_label
+                    text: "0"
+                    font_size: '24sp'
+                    bold: True
+                    color: rgba('#F59E0B')
+                Label:
+                    text: "Exercises"
+                    font_size: '11sp'
+                    color: rgba('#94A3B8')
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: accuracy_label
+                    text: "0%"
+                    font_size: '24sp'
+                    bold: True
+                    color: rgba('#EF4444')
+                Label:
+                    text: "Accuracy"
+                    font_size: '11sp'
+                    color: rgba('#94A3B8')
+
+        ScrollView:
+            GridLayout:
+                cols: 2
+                spacing: 10
+                size_hint_y: None
+                height: 320
+                padding: [0, 4]
+                CardButton:
+                    text: "[b]Vocabulary[/b]\n170+ Words"
+                    markup: True
+                    on_press: root.manager.current = 'vocabulary'
+                    size_hint_y: None
+                    height: 70
+                CardButton:
+                    text: "[b]Grammar[/b]\n100 Rules"
+                    markup: True
+                    on_press: root.manager.current = 'grammar'
+                    size_hint_y: None
+                    height: 70
+                CardButton:
+                    text: "[b]Exercises[/b]\n130+ Tests"
+                    markup: True
+                    on_press: root.manager.current = 'exercises'
+                    size_hint_y: None
+                    height: 70
+                CardButton:
+                    text: "[b]Flashcards[/b]\nSpaced Review"
+                    markup: True
+                    on_press: root.manager.current = 'flashcards'
+                    size_hint_y: None
+                    height: 70
+                CardButton:
+                    text: "[b]Idioms[/b]\n30 Expressions"
+                    markup: True
+                    on_press: root.manager.current = 'idioms'
+                    size_hint_y: None
+                    height: 70
+                CardButton:
+                    text: "[b]Phrases[/b]\nCommon Usage"
+                    markup: True
+                    on_press: root.manager.current = 'phrases'
+                    size_hint_y: None
+                    height: 70
+                CardButton:
+                    text: "[b]Progress[/b]\nYour Stats"
+                    markup: True
+                    on_press: root.manager.current = 'progress'
+                    size_hint_y: None
+                    height: 70
+                CardButton:
+                    text: "[b]Achievements[/b]\nYour Badges"
+                    markup: True
+                    on_press: root.manager.current = 'achievements'
+                    size_hint_y: None
+                    height: 70
+
+        SecondaryButton:
+            text: "Settings"
+            on_press: root.manager.current = 'settings'
+
+# ══════════════════════════════════════════════════════════════
+# VOCABULARY SCREEN
+# ══════════════════════════════════════════════════════════════
+<VocabularyScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 16
+        spacing: 12
+        BoxLayout:
+            size_hint_y: None
+            height: 44
+            SecondaryButton:
+                text: "< Back"
+                size_hint_x: 0.3
+                on_press: root.manager.current = 'home'
+            Label:
+                text: "[b]Vocabulary[/b]"
+                markup: True
+                font_size: '18sp'
+                color: 1,1,1,1
+            PrimaryButton:
+                text: "Speak"
+                size_hint_x: 0.25
+                on_press: root.hear_pronunciation()
+
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 20
+            spacing: 10
+            canvas.before:
+                Color:
+                    rgba: rgba('#1E293B')
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [16]
+            Label:
+                id: word_label
+                text: "Hello"
+                font_size: '32sp'
+                bold: True
+                color: rgba('#3B82F6')
+            Label:
+                id: phonetic_label
+                text: "/həˈloʊ/"
+                font_size: '16sp'
+                color: rgba('#94A3B8')
+            Label:
+                id: category_label
+                text: "greetings | interjection"
+                font_size: '12sp'
+                color: rgba('#64748B')
+            Widget:
+                size_hint_y: 0.3
+            Label:
+                id: meaning_label
+                text: "Tap to reveal"
+                font_size: '20sp'
+                color: rgba('#F59E0B')
+            Label:
+                id: example_label
+                text: ""
+                font_size: '13sp'
+                color: rgba('#94A3B8')
+                text_size: self.size
+                halign: 'center'
+
+        BoxLayout:
+            size_hint_y: None
+            height: 48
+            spacing: 10
+            SecondaryButton:
+                text: "< Previous"
+                on_press: root.prev_word()
+            PrimaryButton:
+                text: "Reveal"
+                on_press: root.toggle_meaning()
+            PrimaryButton:
+                text: "Next >"
+                on_press: root.next_word()
+
+# ══════════════════════════════════════════════════════════════
+# GRAMMAR SCREEN
+# ══════════════════════════════════════════════════════════════
+<GrammarScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 16
+        spacing: 10
+        BoxLayout:
+            size_hint_y: None
+            height: 44
+            SecondaryButton:
+                text: "< Back"
+                size_hint_x: 0.25
+                on_press: root.manager.current = 'home'
+            Label:
+                text: "[b]Grammar Rules[/b]"
+                markup: True
+                font_size: '18sp'
+                color: 1,1,1,1
+
+        BoxLayout:
+            size_hint_y: None
+            height: 36
+            spacing: 6
+            SecondaryButton:
+                text: "All"
+                on_press: root.filter_all()
+            SecondaryButton:
+                text: "Beginner"
+                font_size: '12sp'
+                on_press: root.filter_beginner()
+            SecondaryButton:
+                text: "Inter"
+                font_size: '12sp'
+                on_press: root.filter_intermediate()
+            SecondaryButton:
+                text: "Adv"
+                font_size: '12sp'
+                on_press: root.filter_advanced()
+
+        ScrollView:
+            BoxLayout:
+                id: grammar_list
+                orientation: 'vertical'
+                spacing: 8
+                size_hint_y: None
+                height: self.minimum_height
+                padding: [0, 4]
+
+# ══════════════════════════════════════════════════════════════
+# EXERCISES SCREEN
+# ══════════════════════════════════════════════════════════════
+<ExerciseScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 16
+        spacing: 12
+        BoxLayout:
+            size_hint_y: None
+            height: 44
+            SecondaryButton:
+                text: "< Back"
+                size_hint_x: 0.3
+                on_press: root.manager.current = 'home'
+            Label:
+                text: "[b]Exercises[/b]"
+                markup: True
+                font_size: '18sp'
+                color: 1,1,1,1
+
+        Label:
+            id: question_label
+            text: "Loading..."
+            font_size: '16sp'
+            color: 1,1,1,1
+            text_size: self.size
+            halign: 'center'
+            valign: 'top'
+            size_hint_y: 0.3
+
+        TextInput:
+            id: fill_input
+            hint_text: "Type your answer here"
+            font_size: '16sp'
+            size_hint_y: None
+            height: 48
+            multiline: False
+            opacity: 0
+            disabled: True
+            background_normal: ''
+            background_color: rgba('#1E293B')
+            foreground_color: rgba('#F8FAFC')
+            hint_text_color: rgba('#64748B')
+            cursor_color: rgba('#3B82F6')
+            padding: [16, 12]
+
+        PrimaryButton:
+            id: submit_fill
+            text: "Submit Answer"
+            opacity: 0
+            disabled: True
+            on_press: root.submit_fill_answer()
+
+        ScrollView:
+            BoxLayout:
+                id: options_list
+                orientation: 'vertical'
+                spacing: 8
+                size_hint_y: None
+                height: self.minimum_height
+
+        Label:
+            id: feedback_label
+            text: ""
+            font_size: '15sp'
+            markup: True
+            size_hint_y: None
+            height: 40
+
+# ══════════════════════════════════════════════════════════════
+# IDIOMS SCREEN
+# ══════════════════════════════════════════════════════════════
+<IdiomsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 16
+        spacing: 10
+        BoxLayout:
+            size_hint_y: None
+            height: 44
+            SecondaryButton:
+                text: "< Back"
+                size_hint_x: 0.3
+                on_press: root.manager.current = 'home'
+            Label:
+                text: "[b]Idioms & Expressions[/b]"
+                markup: True
+                font_size: '16sp'
+                color: 1,1,1,1
+
+        ScrollView:
+            BoxLayout:
+                id: idioms_list
+                orientation: 'vertical'
+                spacing: 10
+                size_hint_y: None
+                height: self.minimum_height
+
+# ══════════════════════════════════════════════════════════════
+# PHRASES SCREEN
+# ══════════════════════════════════════════════════════════════
+<PhrasesScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 16
+        spacing: 10
+        BoxLayout:
+            size_hint_y: None
+            height: 44
+            SecondaryButton:
+                text: "< Back"
+                size_hint_x: 0.3
+                on_press: root.manager.current = 'home'
+            Label:
+                text: "[b]Common Phrases[/b]"
+                markup: True
+                font_size: '16sp'
+                color: 1,1,1,1
+
+        ScrollView:
+            BoxLayout:
+                id: phrases_list
+                orientation: 'vertical'
+                spacing: 8
+                size_hint_y: None
+                height: self.minimum_height
+
+# ══════════════════════════════════════════════════════════════
+# PROGRESS SCREEN
+# ══════════════════════════════════════════════════════════════
+<ProgressScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 16
+        spacing: 10
+        BoxLayout:
+            size_hint_y: None
+            height: 44
+            SecondaryButton:
+                text: "< Back"
+                size_hint_x: 0.3
+                on_press: root.manager.current = 'home'
+            Label:
+                text: "[b]Your Progress[/b]"
+                markup: True
+                font_size: '18sp'
+                color: 1,1,1,1
+
+        ScrollView:
+            BoxLayout:
+                id: progress_list
+                orientation: 'vertical'
+                spacing: 6
+                size_hint_y: None
+                height: self.minimum_height
+
+# ══════════════════════════════════════════════════════════════
+# ACHIEVEMENTS SCREEN
+# ══════════════════════════════════════════════════════════════
+<AchievementsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 16
+        spacing: 10
+        BoxLayout:
+            size_hint_y: None
+            height: 44
+            SecondaryButton:
+                text: "< Back"
+                size_hint_x: 0.3
+                on_press: root.manager.current = 'home'
+            Label:
+                text: "[b]Achievements[/b]"
+                markup: True
+                font_size: '18sp'
+                color: 1,1,1,1
+
+        ScrollView:
+            BoxLayout:
+                id: ach_list
+                orientation: 'vertical'
+                spacing: 8
+                size_hint_y: None
+                height: self.minimum_height
+
+# ══════════════════════════════════════════════════════════════
+# FLASHCARD SCREEN
+# ══════════════════════════════════════════════════════════════
+<FlashcardScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 16
+        spacing: 12
+        BoxLayout:
+            size_hint_y: None
+            height: 44
+            SecondaryButton:
+                text: "< Back"
+                size_hint_x: 0.3
+                on_press: root.manager.current = 'home'
+            Label:
+                text: "[b]Flashcards[/b]"
+                markup: True
+                font_size: '18sp'
+                color: 1,1,1,1
+
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 24
+            spacing: 10
+            canvas.before:
+                Color:
+                    rgba: rgba('#1E293B')
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [20]
+            Label:
+                id: card_word
+                text: "Hello"
+                font_size: '30sp'
+                bold: True
+                color: rgba('#3B82F6')
+            Label:
+                id: card_meaning
+                text: "?"
+                font_size: '22sp'
+                color: rgba('#F59E0B')
+            Label:
+                id: card_example
+                text: ""
+                font_size: '13sp'
+                color: rgba('#94A3B8')
+                text_size: self.size
+                halign: 'center'
+
+        PrimaryButton:
+            text: "Flip Card"
+            on_press: root.flip_card()
+
+        BoxLayout:
+            size_hint_y: None
+            height: 48
+            spacing: 10
+            SecondaryButton:
+                text: "Hard (1)"
+                on_press: root.rate_card(1)
+            SecondaryButton:
+                text: "Good (3)"
+                on_press: root.rate_card(3)
+            PrimaryButton:
+                text: "Easy (5)"
+                on_press: root.rate_card(5)
+
+# ══════════════════════════════════════════════════════════════
+# SETTINGS SCREEN
+# ══════════════════════════════════════════════════════════════
+<SettingsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 16
+        spacing: 12
+        BoxLayout:
+            size_hint_y: None
+            height: 44
+            SecondaryButton:
+                text: "< Back"
+                size_hint_x: 0.3
+                on_press: root.manager.current = 'home'
+            Label:
+                text: "[b]Settings[/b]"
+                markup: True
+                font_size: '18sp'
+                color: 1,1,1,1
+
+        BoxLayout:
+            size_hint_y: None
+            height: 48
+            Label:
+                text: "Sound Effects"
+                font_size: '15sp'
+                color: 1,1,1,1
+            Switch:
+                id: sound_switch
+                on_active: root.toggle_sound(self.active)
+
+        Label:
+            text: "Level Selection"
+            font_size: '15sp'
+            color: rgba('#94A3B8')
+            size_hint_y: None
+            height: 30
+
+        BoxLayout:
+            size_hint_y: None
+            height: 44
+            spacing: 8
+            SecondaryButton:
+                text: "Beginner"
+                on_press: root.change_level('beginner')
+            SecondaryButton:
+                text: "Intermediate"
+                on_press: root.change_level('intermediate')
+            SecondaryButton:
+                text: "Advanced"
+                on_press: root.change_level('advanced')
+
+        Widget:
+        PrimaryButton:
+            text: "Logout"
+            background_color: rgba('#EF4444')
+            on_press: root.logout()

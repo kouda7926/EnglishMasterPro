@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    env:
+      JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
     steps:
       - uses: actions/checkout@v4
 
@@ -16,11 +18,17 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install system dependencies
+      - name: Set Java 17
         run: |
           sudo apt-get update
+          sudo apt-get install -y openjdk-17-jdk
+          echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $GITHUB_ENV
+          export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+          java -version
+
+      - name: Install system dependencies
+        run: |
           sudo apt-get install -y \
-            openjdk-17-jdk \
             autoconf \
             libtool \
             pkg-config \
@@ -43,7 +51,10 @@ jobs:
       - name: Build APK
         env:
           BUILDOZER_WARN_ON_ROOT: 0
+          JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
         run: |
+          export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+          java -version
           buildozer -y android debug
 
       - name: Upload APK

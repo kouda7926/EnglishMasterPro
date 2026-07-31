@@ -23,7 +23,7 @@ jobs:
           flutter --version
 
       - name: Get dependencies
-        run: flutter pub get
+        run: flutter pub get --verbose
 
       - name: Analyze code
         run: flutter analyze --no-pub || true
